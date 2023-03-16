@@ -15,6 +15,8 @@
  */
 
 package com.example.android.bluetoothlegatt;
+import android.os.Handler;
+import android.widget.Button;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -53,6 +55,7 @@ public class DeviceControlActivity extends Activity {
 
     private TextView mConnectionState;
     private TextView mDataField;
+    private Handler nHandler;
     private String mDeviceName;
     private String mDeviceAddress;
     private ExpandableListView mGattServicesList;
@@ -156,6 +159,7 @@ public class DeviceControlActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gatt_services_characteristics);
+        this.nHandler = new Handler();
 
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
@@ -165,6 +169,7 @@ public class DeviceControlActivity extends Activity {
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
         mGattServicesList.setOnChildClickListener(servicesListClickListner);
+        n_Runnable.run();
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
 
@@ -310,5 +315,5 @@ public class DeviceControlActivity extends Activity {
         public void run() {
             //to click on list for getting update
              mGattServicesList.performItemClick(null, 4, 0);
-             DeviceControlActivity.this.nHandler.postDelayed(n_Runnable, 500);
+             DeviceControlActivity.this.nHandler.postDelayed(n_Runnable, 500);}};
 }
