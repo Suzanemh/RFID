@@ -306,4 +306,9 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
     }
+    private final Runnable n_Runnable = new Runnable(){
+        public void run() {
+            //to click on list for getting update
+             mGattServicesList.performItemClick(null, 4, 0);
+             DeviceControlActivity.this.nHandler.postDelayed(n_Runnable, 500);
 }
