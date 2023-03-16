@@ -177,6 +177,14 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        Button startServiceButton = (Button)findViewById(R.id.start_foreground_service_button);
+        startServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DeviceControlActivity.this, BluetoothLeService.class);
+                i.setAction(BluetoothLeService.ACTION_START_FOREGROUND_SERVICE);
+                startService(i);    }});
     }
 
     @Override
